@@ -1,7 +1,15 @@
+---
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+---
+
 <div class="grid grid-cols-2 p-4 h-screen">
   <div
     id="editor"
     class="border border-solid border-gray-400 h-full rounded [&>div]:h-full [&>div]:p-2"
+    data-id={id}
   >
   </div>
   <div id="preview" class="p-2"></div>
@@ -15,16 +23,18 @@
   import * as Y from "yjs";
   import { Collaboration } from "@tiptap/extension-collaboration";
 
+  const editorEl = document.getElementById("editor")!;
+
   const doc = new Y.Doc();
 
   const provider = new HocuspocusProvider({
     url: "ws://127.0.0.1:1234",
-    name: "example",
+    name: editorEl.getAttribute("data-id")!,
     document: doc,
   });
 
   new Editor({
-    element: document.getElementById("editor")!,
+    element: editorEl,
     extensions: [
       Document,
       Paragraph,

@@ -3,6 +3,7 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { open } from "sqlite";
 import { randomUUID } from "crypto";
+import { cors } from "hono/cors";
 
 const db = await open({
   filename: "db.sqlite",
@@ -19,6 +20,12 @@ const insertKey = async (key: string) => {
 };
 
 const app = new Hono();
+app.use(
+  "*",
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 app.get("/new", async (c) => {
   let candidate = randomUUID();
   while (1) {

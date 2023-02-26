@@ -1,0 +1,7 @@
+---
+import Editor from "components/Editor.astro";
+import Layout from "components/Layout.astro";
+const { id } = Astro.params;
+---
+
+<Layout>{id && <Editor id={id} />}</Layout>

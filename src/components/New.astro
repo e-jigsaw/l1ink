@@ -1,0 +1,11 @@
+<button id="create-button">new</button>
+<script>
+  const el = document.getElementById("create-button")!;
+  el.addEventListener("click", async () => {
+    const res = await fetch("http://localhost:12345/new");
+    const json = await res.json();
+    if (json.ok) {
+      location.href = `/pages/${json.payload.key}`;
+    }
+  });
+</script>
