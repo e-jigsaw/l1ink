@@ -1,4 +1,11 @@
-<div id="editor"></div>
+<div class="grid grid-cols-2 p-4 h-screen">
+  <div
+    id="editor"
+    class="border border-solid border-gray-400 h-full rounded [&>div]:h-full [&>div]:p-2"
+  >
+  </div>
+  <div id="preview" class="p-2"></div>
+</div>
 <script>
   import { Editor } from "@tiptap/core";
   import { Text } from "@tiptap/extension-text";
@@ -26,5 +33,11 @@
         document: doc,
       }),
     ],
+    onUpdate: ({ editor }) => {
+      const el = document.getElementById("preview");
+      if (el) {
+        el.innerHTML = editor.getText();
+      }
+    },
   });
 </script>
