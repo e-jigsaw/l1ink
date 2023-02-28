@@ -22,16 +22,21 @@ const { id } = Astro.props;
   import { HocuspocusProvider } from "@hocuspocus/provider";
   import * as Y from "yjs";
   import { Collaboration } from "@tiptap/extension-collaboration";
+  import Page from "lib/Page";
 
   const editorEl = document.getElementById("editor")!;
 
   const doc = new Y.Doc();
 
+  const id = editorEl.getAttribute("data-id")!;
+
   const provider = new HocuspocusProvider({
     url: "ws://127.0.0.1:1234",
-    name: editorEl.getAttribute("data-id")!,
+    name: id,
     document: doc,
   });
+
+  const page = new Page(id, "");
 
   new Editor({
     element: editorEl,
@@ -46,6 +51,7 @@ const { id } = Astro.props;
     onUpdate: ({ editor }) => {
       const el = document.getElementById("preview");
       if (el) {
+        page.onUpdate(editor.getText());
         el.innerHTML = editor.getText();
       }
     },

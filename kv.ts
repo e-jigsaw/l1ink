@@ -19,6 +19,10 @@ const insertKey = async (key: string) => {
   return db.run(`INSERT INTO keys(id, title) values (?, ?)`, key, "Untitled");
 };
 
+const upsertKey = async (id: string, title: string) => {
+  return db.run(`UPDATE keys SET title = ? WHERE id = ?`, title, id);
+};
+
 const app = new Hono();
 app.use(
   "*",
@@ -38,6 +42,14 @@ app.get("/new", async (c) => {
   }
   await insertKey(candidate);
   return c.json({ ok: true, payload: { key: candidate } });
+});
+app.post("/title", async (c) => {
+  const body = await c.req.json();
+  if (body.id && body.title) {
+    await upsertKey(body.id, body.title);
+    return c.json({ ok: true });
+  }
+  return c.json({ ok: false });
 });
 serve({
   fetch: app.fetch,
