@@ -5,6 +5,11 @@ import { open } from "sqlite";
 import { randomUUID } from "crypto";
 import { cors } from "hono/cors";
 
+type Key = {
+  id: string;
+  title: string;
+};
+
 const db = await open({
   filename: "db.sqlite",
   driver: sqlite3.Database,
@@ -16,11 +21,25 @@ const checkDuplicateKey = async (key: string) => {
 };
 
 const insertKey = async (key: string) => {
-  return db.run(`INSERT INTO keys(id, title) values (?, ?)`, key, "Untitled");
+  return db.run(
+    `INSERT INTO keys(id, title, created) values (?, ?, ?)`,
+    key,
+    "Untitled",
+    new Date().getTime()
+  );
 };
 
 const upsertKey = async (id: string, title: string) => {
-  return db.run(`UPDATE keys SET title = ? WHERE id = ?`, title, id);
+  return db.run(
+    `UPDATE keys SET title = ?, updated = ? WHERE id = ?`,
+    title,
+    new Date().getTime(),
+    id
+  );
+};
+
+const latestKeys = () => {
+  return db.all(`SELECT id, title FROM keys LIMIT 20`);
 };
 
 const app = new Hono();
@@ -50,6 +69,10 @@ app.post("/title", async (c) => {
     return c.json({ ok: true });
   }
   return c.json({ ok: false });
+});
+app.get("/keys", async (c) => {
+  const payload = (await latestKeys()) as Key[];
+  return c.json({ ok: true, payload });
 });
 serve({
   fetch: app.fetch,

@@ -1,6 +1,28 @@
 ---
 import Layout from "components/Layout.astro";
 import New from "components/New.astro";
+
+type Key = {
+  id: string;
+  title: string;
+  created: number;
+  updated: number;
+};
+
+const res = await fetch("http://localhost:12345/keys");
+const json = await res.json();
+const pages = json.payload as Key[];
 ---
 
-<Layout><New /></Layout>
+<Layout>
+  <New />
+  <ul>
+    {
+      pages.map((page) => (
+        <li>
+          <a href={`/pages/${page.id}`}>{page.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
