@@ -32,10 +32,7 @@ const { id } = Astro.props;
   const id = editorEl.getAttribute("data-id")!;
 
   const provider = new SupabaseProvider(doc, supabase, {
-    channel: id,
     id,
-    tableName: "pages",
-    columnName: "document",
   });
   let page: Page | null = null;
 

@@ -7,10 +7,6 @@ import { REALTIME_LISTEN_TYPES } from "@supabase/realtime-js/src/RealtimeChannel
 import { EventEmitter } from "eventemitter3";
 
 export interface SupabaseProviderConfig {
-  channel: string;
-  tableName: string;
-  columnName: string;
-  idName?: string;
   id: string | number;
   awareness?: awarenessProtocol.Awareness;
   resyncInterval?: number | false;
@@ -19,7 +15,9 @@ export interface SupabaseProviderConfig {
 export default class SupabaseProvider extends EventEmitter {
   public awareness: awarenessProtocol.Awareness;
   public connected = false;
+
   private channel: RealtimeChannel | null = null;
+  private channel_id: string | null = null;
 
   private _synced: boolean = false;
   private resyncInterval: NodeJS.Timer | undefined;
@@ -66,9 +64,9 @@ export default class SupabaseProvider extends EventEmitter {
     const content = Array.from(Y.encodeStateAsUpdate(this.doc));
 
     const { error } = await this.supabase
-      .from(this.config.tableName)
-      .update({ [this.config.columnName]: content })
-      .eq(this.config.idName || "id", this.config.id);
+      .from("pages")
+      .update({ document: content })
+      .eq("id", this.config.id);
 
     if (error) {
       throw error;
@@ -80,20 +78,38 @@ export default class SupabaseProvider extends EventEmitter {
   private async onConnect() {
     this.logger("connected");
 
-    const { data, error, status } = await this.supabase
-      .from(this.config.tableName)
-      .select<string, { [key: string]: number[] }>(`${this.config.columnName}`)
-      .eq(this.config.idName || "id", this.config.id)
-      .single();
+    if (this.channel_id) {
+      this.channel = this.supabase.channel(this.channel_id);
+      if (this.channel) {
+        this.channel
+          .on(
+            REALTIME_LISTEN_TYPES.BROADCAST,
+            { event: "message" },
+            ({ payload }) => {
+              this.onMessage(Uint8Array.from(payload), this);
+            }
+          )
+          .on(
+            REALTIME_LISTEN_TYPES.BROADCAST,
+            { event: "awareness" },
+            ({ payload }) => {
+              this.onAwareness(Uint8Array.from(payload));
+            }
+          )
+          .subscribe((status, err) => {
+            if (status === "CHANNEL_ERROR") {
+              this.logger("CHANNEL_ERROR", err);
+              this.emit("error", this);
+            }
 
-    this.logger("retrieved data from supabase", status);
+            if (status === "TIMED_OUT") {
+              this.emit("disconnect", this);
+            }
 
-    if (data && data[this.config.columnName]) {
-      this.logger("applying update to yjs");
-      try {
-        this.applyUpdate(Uint8Array.from(data[this.config.columnName]));
-      } catch (error) {
-        this.logger(error);
+            if (status === "CLOSED") {
+              this.emit("disconnect", this);
+            }
+          });
       }
     }
 
@@ -123,42 +139,26 @@ export default class SupabaseProvider extends EventEmitter {
     }
   }
 
-  private connect() {
-    this.channel = this.supabase.channel(this.config.channel);
-    if (this.channel) {
-      this.channel
-        .on(
-          REALTIME_LISTEN_TYPES.BROADCAST,
-          { event: "message" },
-          ({ payload }) => {
-            this.onMessage(Uint8Array.from(payload), this);
-          }
-        )
-        .on(
-          REALTIME_LISTEN_TYPES.BROADCAST,
-          { event: "awareness" },
-          ({ payload }) => {
-            this.onAwareness(Uint8Array.from(payload));
-          }
-        )
-        .subscribe((status, err) => {
-          if (status === "SUBSCRIBED") {
-            this.emit("connect", this);
-          }
+  private async connect() {
+    const { data, error, status } = await this.supabase
+      .from("pages")
+      .select<string, { document: number[]; channel_id: string }>(
+        "document, channel_id"
+      )
+      .eq("id", this.config.id)
+      .single();
 
-          if (status === "CHANNEL_ERROR") {
-            this.logger("CHANNEL_ERROR", err);
-            this.emit("error", this);
-          }
+    this.logger("retrieved data from supabase", status);
 
-          if (status === "TIMED_OUT") {
-            this.emit("disconnect", this);
-          }
-
-          if (status === "CLOSED") {
-            this.emit("disconnect", this);
-          }
-        });
+    if (data && data.document) {
+      this.channel_id = data.channel_id;
+      this.logger("applying update to yjs");
+      try {
+        this.applyUpdate(Uint8Array.from(data.document));
+        this.emit("connect");
+      } catch (error) {
+        this.logger(error);
+      }
     }
   }
 
@@ -225,7 +225,6 @@ export default class SupabaseProvider extends EventEmitter {
         });
     });
     this.on("message", (update) => {
-      console.log(update.detail);
       if (this.channel)
         this.channel.send({
           type: "broadcast",
