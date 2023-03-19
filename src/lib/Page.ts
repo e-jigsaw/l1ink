@@ -1,3 +1,5 @@
+import { supabase } from "lib/getClient";
+
 export default class Page {
   public text: string;
   public title: string | undefined;
@@ -6,6 +8,7 @@ export default class Page {
   constructor(id: string, str: string) {
     this.text = str;
     this.id = id;
+    this.parse(true);
   }
 
   onUpdate(str: string) {
@@ -13,21 +16,16 @@ export default class Page {
     this.parse();
   }
 
-  async parse() {
+  async parse(isInit = false) {
     const [title, ...lines] = this.text.split("\n");
     if (this.title !== title) {
       this.title = title;
-      const res = await fetch("http://localhost:12345/title", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: this.id,
-          title,
-        }),
-      });
-      const json = await res.json();
+      if (!isInit) {
+        const { data } = await supabase
+          .from("pages")
+          .update({ title: title })
+          .eq("id", this.id);
+      }
     }
   }
 }

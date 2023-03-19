@@ -19,7 +19,6 @@ const { id } = Astro.props;
   import { Text } from "@tiptap/extension-text";
   import { Document } from "@tiptap/extension-document";
   import { Paragraph } from "@tiptap/extension-paragraph";
-  import { HocuspocusProvider } from "@hocuspocus/provider";
   import * as Y from "yjs";
   import { Collaboration } from "@tiptap/extension-collaboration";
   import Page from "lib/Page";
@@ -38,10 +37,9 @@ const { id } = Astro.props;
     tableName: "pages",
     columnName: "document",
   });
+  let page: Page | null = null;
 
-  const page = new Page(id, "");
-
-  new Editor({
+  const editor = new Editor({
     element: editorEl,
     extensions: [
       Document,
@@ -53,10 +51,16 @@ const { id } = Astro.props;
     ],
     onUpdate: ({ editor }) => {
       const el = document.getElementById("preview");
-      if (el) {
+      if (el && page) {
         page.onUpdate(editor.getText());
         el.innerHTML = editor.getText();
       }
     },
+  });
+
+  provider.on("status", (payload) => {
+    if (payload[0].status === "connected") {
+      page = new Page(id, editor.getText());
+    }
   });
 </script>

@@ -9,9 +9,7 @@ type Key = {
   updated: number;
 };
 
-const res = await fetch("http://localhost:12345/keys");
-const json = await res.json();
-const pages = json.payload as Key[];
+const pages = [] as Key[];
 ---
 
 <Layout>
