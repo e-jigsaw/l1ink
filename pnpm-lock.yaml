@@ -9,6 +9,7 @@ specifiers:
   '@supabase/supabase-js': ^2.11.0
   '@tiptap/core': 2.0.0-beta.220
   '@tiptap/extension-collaboration': 2.0.0-beta.220
+  '@tiptap/extension-collaboration-cursor': 2.0.0-beta.220
   '@tiptap/extension-document': 2.0.0-beta.220
   '@tiptap/extension-paragraph': 2.0.0-beta.220
   '@tiptap/extension-text': 2.0.0-beta.220
@@ -37,6 +38,7 @@ dependencies:
   '@supabase/supabase-js': 2.11.0
   '@tiptap/core': 2.0.0-beta.220_@tiptap+pm@2.0.0-beta.220
   '@tiptap/extension-collaboration': 2.0.0-beta.220_vghkcsy37zmnft7cy7riket6na
+  '@tiptap/extension-collaboration-cursor': 2.0.0-beta.220_xurnhx2lyuimbqrywcpq5zxutu
   '@tiptap/extension-document': 2.0.0-beta.220_7w7m52asdh3tod4ocz57yex63q
   '@tiptap/extension-paragraph': 2.0.0-beta.220_7w7m52asdh3tod4ocz57yex63q
   '@tiptap/extension-text': 2.0.0-beta.220_7w7m52asdh3tod4ocz57yex63q
@@ -1060,6 +1062,16 @@ packages:
       '@tiptap/pm': ^2.0.0-beta.209
     dependencies:
       '@tiptap/pm': 2.0.0-beta.220_7w7m52asdh3tod4ocz57yex63q
+    dev: false
+
+  /@tiptap/extension-collaboration-cursor/2.0.0-beta.220_xurnhx2lyuimbqrywcpq5zxutu:
+    resolution: {integrity: sha512-oDZlR4Bfbl7VFcdbaXaC2wvz3a5RfHF638Vb2RKSXj7DOZc6Eay5gbLTYkXmWjHwELdjWgyHVnzFPHyn1Q71IA==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0-beta.209
+      y-prosemirror: 1.0.20
+    dependencies:
+      '@tiptap/core': 2.0.0-beta.220_@tiptap+pm@2.0.0-beta.220
+      y-prosemirror: 1.2.0_m5ovwma2ayq5oz5h5ulsx7wbpa
     dev: false
 
   /@tiptap/extension-collaboration/2.0.0-beta.220_vghkcsy37zmnft7cy7riket6na:
