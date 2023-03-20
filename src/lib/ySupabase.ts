@@ -65,7 +65,7 @@ export default class SupabaseProvider extends EventEmitter {
 
     const { error } = await this.supabase
       .from("pages")
-      .update({ document: content })
+      .update({ document: content, updated_at: new Date() })
       .eq("id", this.config.id);
 
     if (error) {
