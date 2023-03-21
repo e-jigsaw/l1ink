@@ -26,10 +26,7 @@ export default class Page {
     if (this.title !== title) {
       this.title = title;
       if (!isInit) {
-        const { data } = await supabase
-          .from("pages")
-          .update({ title: title })
-          .eq("id", this.id);
+        await supabase.from("pages").update({ title: title }).eq("id", this.id);
       }
     }
   }

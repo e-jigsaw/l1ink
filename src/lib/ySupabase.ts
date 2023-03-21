@@ -156,8 +156,11 @@ export default class SupabaseProvider extends EventEmitter {
       this.project = data.project;
     }
 
-    if (data && data.document) {
+    if (data && data.channel_id) {
       this.channel_id = data.channel_id;
+    }
+
+    if (data && data.document && data.document.length > 0) {
       this.logger("applying update to yjs");
       try {
         this.applyUpdate(Uint8Array.from(data.document));
@@ -165,6 +168,8 @@ export default class SupabaseProvider extends EventEmitter {
       } catch (error) {
         this.logger(error);
       }
+    } else {
+      this.emit("connect");
     }
   }
 
