@@ -54,6 +54,7 @@ const { id } = Astro.props;
   import { supabase } from "lib/getClient";
   import SupabaseProvider from "lib/ySupabase";
   import { CollaborationCursor } from "@tiptap/extension-collaboration-cursor";
+  import { Link } from "lib/LinkExtension";
 
   const editorEl = document.getElementById("editor")!;
 
@@ -82,6 +83,7 @@ const { id } = Astro.props;
           color: "#f00",
         },
       }),
+      Link,
     ],
     onUpdate: ({ editor }) => {
       const el = document.getElementById("preview");
