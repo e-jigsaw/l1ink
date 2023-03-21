@@ -1,13 +1,18 @@
 import { supabase } from "lib/getClient";
+import type SupabaseProvider from "./ySupabase";
 
 export default class Page {
   public text: string;
   public title: string | undefined;
   public id: string;
+  public project: string | null;
+  private provider: SupabaseProvider;
 
-  constructor(id: string, str: string) {
+  constructor(id: string, str: string, provider: SupabaseProvider) {
     this.text = str;
     this.id = id;
+    this.provider = provider;
+    this.project = provider.project;
     this.parse(true);
   }
 

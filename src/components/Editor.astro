@@ -33,6 +33,7 @@ const { id } = Astro.props;
     white-space: nowrap;
   }
 </style>
+<button class="border p-1 rounded" id="top">top</button>
 <div class="grid grid-cols-2 p-4 h-screen">
   <div
     id="editor"
@@ -93,7 +94,13 @@ const { id } = Astro.props;
 
   provider.on("status", (payload) => {
     if (payload[0].status === "connected") {
-      page = new Page(id, editor.getText());
+      page = new Page(id, editor.getText(), provider);
+    }
+  });
+
+  document.getElementById("top")?.addEventListener("click", () => {
+    if (page) {
+      location.href = `/projects/${page.project}`;
     }
   });
 </script>

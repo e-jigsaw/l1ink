@@ -15,6 +15,7 @@ export interface SupabaseProviderConfig {
 export default class SupabaseProvider extends EventEmitter {
   public awareness: awarenessProtocol.Awareness;
   public connected = false;
+  public project: string | null = null;
 
   private channel: RealtimeChannel | null = null;
   private channel_id: string | null = null;
@@ -142,13 +143,18 @@ export default class SupabaseProvider extends EventEmitter {
   private async connect() {
     const { data, error, status } = await this.supabase
       .from("pages")
-      .select<string, { document: number[]; channel_id: string }>(
-        "document, channel_id"
-      )
+      .select<
+        string,
+        { document: number[]; channel_id: string; project: string }
+      >("document, channel_id, project")
       .eq("id", this.config.id)
       .single();
 
     this.logger("retrieved data from supabase", status);
+
+    if (data && data.project) {
+      this.project = data.project;
+    }
 
     if (data && data.document) {
       this.channel_id = data.channel_id;

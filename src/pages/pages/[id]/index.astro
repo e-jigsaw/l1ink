@@ -5,6 +5,5 @@ const { id } = Astro.params;
 ---
 
 <Layout>
-  <a href="/"><button class="border rounded p-2">top</button></a>
-  <div>{id && <Editor id={id} />}</div>
+  {id && <Editor id={id} />}
 </Layout>
