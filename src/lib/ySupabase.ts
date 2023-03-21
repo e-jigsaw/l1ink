@@ -20,7 +20,7 @@ export default class SupabaseProvider extends EventEmitter {
   private channel_id: string | null = null;
 
   private _synced: boolean = false;
-  private resyncInterval: NodeJS.Timer | undefined;
+  private resyncInterval: number | undefined;
   protected logger: typeof console.log;
   public readonly id: number;
 
@@ -213,8 +213,6 @@ export default class SupabaseProvider extends EventEmitter {
         "beforeunload",
         this.removeSelfFromAwarenessOnUnload
       );
-    } else if (typeof process !== "undefined") {
-      process.on("exit", () => this.removeSelfFromAwarenessOnUnload);
     }
     this.on("awareness", (update) => {
       if (this.channel)
@@ -312,8 +310,6 @@ export default class SupabaseProvider extends EventEmitter {
         "beforeunload",
         this.removeSelfFromAwarenessOnUnload
       );
-    } else if (typeof process !== "undefined") {
-      process.off("exit", () => this.removeSelfFromAwarenessOnUnload);
     }
 
     this.awareness.off("update", this.onAwarenessUpdate);
