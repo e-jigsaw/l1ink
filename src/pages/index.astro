@@ -1,26 +1,7 @@
 ---
 import Layout from "components/Layout.astro";
-import New from "components/New.astro";
-
-type Key = {
-  id: string;
-  title: string;
-  created: number;
-  updated: number;
-};
-
-const pages = [] as Key[];
 ---
 
 <Layout>
-  <New />
-  <ul>
-    {
-      pages.map((page) => (
-        <li>
-          <a href={`/pages/${page.id}`}>{page.title}</a>
-        </li>
-      ))
-    }
-  </ul>
+  <div>works</div>
 </Layout>
