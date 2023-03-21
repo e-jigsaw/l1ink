@@ -13,6 +13,7 @@ export const Project: React.FC<{ name: string }> = ({ name }) => {
       .from("pages")
       .select("title,id")
       .eq("project", name)
+      .order("updated_at", { ascending: false })
       .then((res) => {
         if (res.data) {
           setPages(res.data);
@@ -23,7 +24,9 @@ export const Project: React.FC<{ name: string }> = ({ name }) => {
     <ul>
       {pages.map((page) => (
         <li key={page.id}>
-          <a href={`/pages/${page.id}`}>{page.title}</a>
+          <a href={`/pages/${page.id}`}>
+            {page.title.length === 0 ? "Untitled" : page.title}
+          </a>
         </li>
       ))}
     </ul>
