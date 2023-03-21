@@ -1,11 +1,24 @@
-<button id="create-button">new</button>
+---
+type Props = {
+  projectName?: string;
+};
+const { projectName } = Astro.props;
+---
+
+<button id="create-button" data-name={projectName}>new</button>
 <script>
+  import { supabase } from "lib/getClient";
+
   const el = document.getElementById("create-button")!;
   el.addEventListener("click", async () => {
-    const res = await fetch("http://localhost:12345/new");
-    const json = await res.json();
-    if (json.ok) {
-      location.href = `/pages/${json.payload.key}`;
+    const page = await supabase
+      .from("pages")
+      .insert({ project: el.getAttribute("data-name"), document: [] })
+      .select();
+    if (page.data) {
+      if (page.data[0]) {
+        location.href = `/pages/${page.data[0].id}`;
+      }
     }
   });
 </script>

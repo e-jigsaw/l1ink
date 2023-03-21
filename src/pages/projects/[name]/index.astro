@@ -6,6 +6,6 @@ const { name } = Astro.params;
 ---
 
 <Layout>
-  <New />
+  <New projectName={name} />
   {name && <Project name={name} client:only />}
 </Layout>
