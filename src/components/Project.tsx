@@ -22,7 +22,9 @@ export const Project: React.FC<{ name: string }> = ({ name }) => {
   return (
     <ul>
       {pages.map((page) => (
-        <li key={page.id}>{page.title}</li>
+        <li key={page.id}>
+          <a href={`/pages/${page.id}`}>{page.title}</a>
+        </li>
       ))}
     </ul>
   );
