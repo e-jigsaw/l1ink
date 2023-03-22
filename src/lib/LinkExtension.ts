@@ -1,13 +1,5 @@
 import { Extension } from "@tiptap/core";
 
-declare module "@tiptap/core" {
-  interface Commands<ReturnType> {
-    link: {
-      checkInsert: () => ReturnType;
-    };
-  }
-}
-
 export const Link = Extension.create({
   name: "link",
   addKeyboardShortcuts() {
