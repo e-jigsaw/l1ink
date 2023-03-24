@@ -16,7 +16,7 @@ specifiers:
   '@tiptap/pm': 2.0.0-beta.220
   '@types/react': ^18.0.21
   '@types/react-dom': ^18.0.6
-  astro: ^2.1.3
+  astro: ^2.1.5
   eventemitter3: ^5.0.0
   npm-run-all: ^4.1.5
   prettier-plugin-astro: ^0.8.0
@@ -26,11 +26,11 @@ specifiers:
   typescript: ^4.9.5
   y-prosemirror: ^1.2.0
   y-protocols: ^1.0.5
-  yjs: ^13.5.50
+  yjs: ^13.5.51
 
 dependencies:
   '@astrojs/react': 2.1.0_3xleytyzprlgycb2ded54tx72i
-  '@astrojs/tailwind': 3.1.1_2l4ywwlgzw2satesmi43zum3jy
+  '@astrojs/tailwind': 3.1.1_abn63hxpww4cnl7d6wt4twjp3u
   '@supabase/auth-ui-react': 0.3.5_wz3heplcnnd7qi7v6mf66rcxkq
   '@supabase/auth-ui-shared': 0.1.3_wz3heplcnnd7qi7v6mf66rcxkq
   '@supabase/realtime-js': 2.7.1
@@ -44,15 +44,15 @@ dependencies:
   '@tiptap/pm': 2.0.0-beta.220_7w7m52asdh3tod4ocz57yex63q
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
-  astro: 2.1.3
+  astro: 2.1.5
   eventemitter3: 5.0.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   tailwindcss: 3.2.7
   typescript: 4.9.5
-  y-prosemirror: 1.2.0_m5ovwma2ayq5oz5h5ulsx7wbpa
+  y-prosemirror: 1.2.0_7ihrd6a5hrnbis2lbumtphovpi
   y-protocols: 1.0.5
-  yjs: 13.5.50
+  yjs: 13.5.51
 
 devDependencies:
   npm-run-all: 4.1.5
@@ -98,15 +98,14 @@ packages:
       vscode-uri: 3.0.7
     dev: false
 
-  /@astrojs/markdown-remark/2.1.0_astro@2.1.3:
-    resolution: {integrity: sha512-w9T5o3UWQIfMcCkM2nLWrlfVQazh/7mw+2N/85QGcSUkZy6oNJoyy8Xz/ZkDhHLx8HPO0RT9fABR0B/H+aDaEw==}
+  /@astrojs/markdown-remark/2.1.2_astro@2.1.5:
+    resolution: {integrity: sha512-rYkmFEv2w7oEk6ZPgxHkhWzwcxSUGc1vJU0cbCu5sHF8iFNnc1cmMsjXWa5DrU5sCEf8VVYE1iFlbbnFzvHQJw==}
     peerDependencies:
-      astro: ^2.1.0
+      astro: ^2.1.5
     dependencies:
       '@astrojs/prism': 2.1.1
-      astro: 2.1.3
+      astro: 2.1.5
       github-slugger: 1.5.0
-      image-size: 1.0.2
       import-meta-resolve: 2.2.1
       rehype-raw: 6.1.1
       rehype-stringify: 9.0.3
@@ -148,14 +147,14 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/tailwind/3.1.1_2l4ywwlgzw2satesmi43zum3jy:
+  /@astrojs/tailwind/3.1.1_abn63hxpww4cnl7d6wt4twjp3u:
     resolution: {integrity: sha512-Wx/ZtVnmtfqHWGVzvUEYZm8rufVKVgDIef0q6fzwUxoT1EpTTwBkTbpnzooogewMLOh2eTscasGe3Ih2HC1wVA==}
     peerDependencies:
       astro: ^2.1.3
       tailwindcss: ^3.0.24
     dependencies:
       '@proload/core': 0.3.3
-      astro: 2.1.3
+      astro: 2.1.5
       autoprefixer: 10.4.13_postcss@8.4.21
       postcss: 8.4.21
       postcss-load-config: 4.0.1_postcss@8.4.21
@@ -851,7 +850,7 @@ packages:
       y-prosemirror: 1.0.20
     dependencies:
       '@tiptap/core': 2.0.0-beta.220_@tiptap+pm@2.0.0-beta.220
-      y-prosemirror: 1.2.0_m5ovwma2ayq5oz5h5ulsx7wbpa
+      y-prosemirror: 1.2.0_7ihrd6a5hrnbis2lbumtphovpi
     dev: false
 
   /@tiptap/extension-collaboration/2.0.0-beta.220_vghkcsy37zmnft7cy7riket6na:
@@ -863,7 +862,7 @@ packages:
     dependencies:
       '@tiptap/core': 2.0.0-beta.220_@tiptap+pm@2.0.0-beta.220
       '@tiptap/pm': 2.0.0-beta.220_7w7m52asdh3tod4ocz57yex63q
-      y-prosemirror: 1.2.0_m5ovwma2ayq5oz5h5ulsx7wbpa
+      y-prosemirror: 1.2.0_7ihrd6a5hrnbis2lbumtphovpi
     dev: false
 
   /@tiptap/extension-document/2.0.0-beta.220_7w7m52asdh3tod4ocz57yex63q:
@@ -1151,8 +1150,8 @@ packages:
     resolution: {integrity: sha512-I1jXZMjAgCMmxT4qxXfPXa6SthSoE8h6gkSI9BGGNv8mP8G/v0blc+qFnZu6K42vTOiuME596QaLO0TP3Lk0xg==}
     dev: false
 
-  /astro/2.1.3:
-    resolution: {integrity: sha512-5LFo/ixDXs84tgrSbzz0X5c7nzLfkag7w4tgOpBRL/DkveP83v+nSe3KjqwYLPL5vNY9UvryKHsfC0uu4TQz0g==}
+  /astro/2.1.5:
+    resolution: {integrity: sha512-NFHFkf3DkyV/9FQ9uMxXx9KP9a6nBOMDd9OC9SWgCwTJc2+Cm4oL94BnKmZ2SNR124pSoKimnaBkZncTYmIVwA==}
     engines: {node: '>=16.12.0', npm: '>=6.14.0'}
     hasBin: true
     peerDependencies:
@@ -1163,7 +1162,7 @@ packages:
     dependencies:
       '@astrojs/compiler': 1.2.1
       '@astrojs/language-server': 0.28.3
-      '@astrojs/markdown-remark': 2.1.0_astro@2.1.3
+      '@astrojs/markdown-remark': 2.1.2_astro@2.1.5
       '@astrojs/telemetry': 2.1.0
       '@astrojs/webapi': 2.1.0
       '@babel/core': 7.21.0
@@ -1191,7 +1190,6 @@ packages:
       github-slugger: 2.0.0
       gray-matter: 4.0.3
       html-escaper: 3.0.3
-      image-size: 1.0.2
       kleur: 4.1.5
       magic-string: 0.27.0
       mime: 3.0.0
@@ -2165,14 +2163,6 @@ packages:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
     dev: false
 
-  /image-size/1.0.2:
-    resolution: {integrity: sha512-xfOoWjceHntRb3qFCrh5ZFORYH8XCdYpASltMhZ/Q0KZiOwjdE/Yl2QCiWdwD+lygV5bMCvauzgu5PxBX/Yerg==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
-    dependencies:
-      queue: 6.0.2
-    dev: false
-
   /import-meta-resolve/2.2.1:
     resolution: {integrity: sha512-C6lLL7EJPY44kBvA80gq4uMsVFw5x3oSKfuMl1cuZ2RkI5+UJqQXgn+6hlUew0y4ig7Ypt4CObAAIzU53Nfpuw==}
     dev: false
@@ -2448,6 +2438,14 @@ packages:
   /lib0/0.2.63:
     resolution: {integrity: sha512-JhUd/JXR4rnWsSP1zup904ACbVFcdRieWoIGwGAtHww4zms0gNyi8EM30Rfftnk+6A10qQMSufjLM0/ncq06xw==}
     engines: {node: '>=14'}
+    dependencies:
+      isomorphic.js: 0.2.5
+    dev: false
+
+  /lib0/0.2.72:
+    resolution: {integrity: sha512-JPnUxl15tO6jrBASQ92+uDyQzW4ISMhDORq6mLovBYxESEWQCj5SnC8oYkELboGbU1ZqCIEEDwCL6mYqWNzdOA==}
+    engines: {node: '>=14'}
+    hasBin: true
     dependencies:
       isomorphic.js: 0.2.5
     dev: false
@@ -3583,12 +3581,6 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: false
 
-  /queue/6.0.2:
-    resolution: {integrity: sha512-iHZWu+q3IdFZFX36ro/lKBkSvfkztY5Y7HMiPlOUjhupPcG2JMfst2KKEpu5XndviX/3UhFbRngUPNKtgvtZiA==}
-    dependencies:
-      inherits: 2.0.4
-    dev: false
-
   /quick-lru/5.1.1:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
@@ -4583,7 +4575,7 @@ packages:
     engines: {node: '>=0.4'}
     dev: false
 
-  /y-prosemirror/1.2.0_m5ovwma2ayq5oz5h5ulsx7wbpa:
+  /y-prosemirror/1.2.0_7ihrd6a5hrnbis2lbumtphovpi:
     resolution: {integrity: sha512-t3uxuX4HIkb1GNt8jV+dplRbNH2OmQD/BNeCCbjLD3Mq0o6JEXxHedv58ZIPFDE6ma24jljlL+u8pGvN6B37XQ==}
     peerDependencies:
       prosemirror-model: ^1.7.1
@@ -4595,7 +4587,7 @@ packages:
       lib0: 0.2.63
       typescript: 4.9.5
       y-protocols: 1.0.5
-      yjs: 13.5.50
+      yjs: 13.5.51
     dev: false
 
   /y-protocols/1.0.5:
@@ -4632,10 +4624,11 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /yjs/13.5.50:
-    resolution: {integrity: sha512-Q2KVNfovwjtJV4Yxz+HaFYT6vTYBaFagOSpTL3jbPc7Sbv/My68fLTfPlYy9FmNO87pV8dMBd5XuVar+9WsAWg==}
+  /yjs/13.5.51:
+    resolution: {integrity: sha512-F1Nb3z3TdandD80IAeQqgqy/2n9AhDLcXoBhZvCUX1dNVe0ef7fIwi6MjSYaGAYF2Ev8VcLcsGnmuGGOl7AWbw==}
+    engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     dependencies:
-      lib0: 0.2.63
+      lib0: 0.2.72
     dev: false
 
   /yocto-queue/0.1.0:
